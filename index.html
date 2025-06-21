@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprint Flow - Planifiez mieux vos sprints</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdfdfd;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #ecf0ff;
+      padding: 60px 20px 30px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2em;
+      color: #666;
+    }
+    nav {
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+    }
+    nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    .language-selector {
+      display: flex;
+      gap: 5px;
+    }
+    .lang-btn {
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+    .lang-btn.active {
+      background: #5565f0;
+      color: white;
+      border-color: #5565f0;
+    }
+    .lang-btn:hover {
+      background: #e0e0e0;
+    }
+    .lang-btn.active:hover {
+      background: #4454df;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section h2 {
+      font-size: 2.2em;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    #visuel {
+      padding-top: 20px;
+      background: #f8f9ff;
+      margin: 0;
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    #visuel > * {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    #features {
+      background: #ffffff;
+    }
+    #avantages {
+      background: #f8f9ff;
+      margin: 0;
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    #avantages > * {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    #temoignages {
+      background: #ffffff;
+    }
+    #essai {
+      background: #f0f2ff;
+      margin: 0;
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    #essai > * {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .cta {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .cta button {
+      background: #5565f0;
+      color: white;
+      border: none;
+      padding: 40px 40px;
+      font-size: 2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .feature {
+      background: #f7f9ff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .testimonial {
+      background: #fff;
+      border-left: 5px solid #5565f0;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    footer {
+      background: #fafafa;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #888;
+    }
+    img.screenshot {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin: 30px auto 0 auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-links">
+      <a href="#features" data-key="nav-features">Fonctionnalités</a>
+      <a href="#avantages" data-key="nav-benefits">Avantages</a>
+      <a href="#visuel" data-key="nav-preview">Aperçu</a>
+      <!--<a href="#temoignages">Témoignages</a>-->
+      <a href="#essai" data-key="nav-trial">Essai gratuit</a>
+    </div>
+    <div class="language-selector">
+      <button onclick="changeLanguage('fr')" class="lang-btn active" id="fr-btn">FR</button>
+      <button onclick="changeLanguage('en')" class="lang-btn" id="en-btn">EN</button>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Sprint Flow</h1>
+    <h1 data-key="main-title">Planifiez vos Sprints en toute simplicité</h1>
+    <p data-key="main-subtitle">Suivi clair, capacité maîtrisée, estimation fluide. Gagnez du temps, livrez mieux.</p>
+    <div class="cta">
+      <button onclick="document.getElementById('essai').scrollIntoView({ behavior: 'smooth' })" data-key="start-now">
+        Commencer maintenant
+      </button>
+    </div>
+  </header>
+
+  <section id="visuel">
+    <img src="home.png" alt="Capture Sprint Flow" class="screenshot">
+  </section>
+
+  <section id="features">
+    <h2 data-key="features-title">Fonctionnalités clés</h2>
+    <div class="features">
+      <div class="feature">
+        <h3 data-key="feature1-title">Planification intuitive</h3>
+        <p data-key="feature1-desc">Créez vos sprints en quelques clics avec une vue d'ensemble claire.</p>
+      </div>
+      <div class="feature">
+        <h3 data-key="feature2-title">Estimation visuelle</h3>
+        <p data-key="feature2-desc">Utilisez des tailles de t-shirts configurables pour estimer rapidement les user stories.</p>
+      </div>
+      <div class="feature">
+        <h3 data-key="feature3-title">Suivi de capacité</h3>
+        <p data-key="feature3-desc">Analysez l'utilisation de la capacité de votre équipe et anticipez les écarts.</p>
+      </div>
+      <div class="feature">
+        <h3 data-key="feature4-title">Suivi en temps réel</h3>
+        <p data-key="feature4-desc">Gardez la trace de l'avancement du backlog et des tâches assignées.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="avantages">
+    <h2 data-key="benefits-title">Pourquoi choisir Sprint Flow ?</h2>
+    <br/>
+    <ul>
+      <li data-key="benefit1">✅ Gagnez du temps sur chaque sprint planning</li>
+      <li data-key="benefit2">✅ Évitez la surcharge de travail grâce à la capacité calculée automatiquement</li>
+      <li data-key="benefit3">✅ Interface épurée, prise en main immédiate</li>
+      <li data-key="benefit4">✅ Idéal pour les petites et moyennes équipes agiles</li>
+    </ul>
+  </section>
+
+
+  <!--<section id="temoignages">
+    <h2>Ils utilisent déjà Sprint Flow</h2>
+    <div class="testimonial">
+      <p>"En 5 minutes, notre sprint est planifié. La capacité de l'équipe est toujours maîtrisée. Un must-have."</p>
+      <strong>– Clara, Product Owner</strong>
+    </div>
+    <div class="testimonial">
+      <p>"Enfin un outil simple et efficace pour notre startup. L'estimation visuelle est top !"</p>
+      <strong>– Romain, CTO</strong>
+    </div>
+  </section>
+-->
+
+  <section id="essai" class="cta">
+    <h2 data-key="trial-title">Prêt à booster vos plannings ?</h2>
+    <p data-key="trial-desc">Essayez Sprint Flow gratuitement dès maintenant.</p>
+    <button data-key="trial-button">Obtenir mon essai gratuit</button>
+  </section>
+
+  <footer>
+    &copy; 2025 Sprint Flow. Tous droits réservés.
+  </footer>
+
+  <script>
+    // Translation data
+    const translations = {
+      fr: {
+        'nav-features': 'Fonctionnalités',
+        'nav-benefits': 'Avantages',
+        'nav-preview': 'Aperçu',
+        'nav-trial': 'Essai gratuit',
+        'main-title': 'Planifiez vos Sprints en toute simplicité',
+        'main-subtitle': 'Suivi clair, capacité maîtrisée, estimation fluide. Gagnez du temps, livrez mieux.',
+        'start-now': 'Commencer maintenant',
+        'features-title': 'Fonctionnalités clés',
+        'feature1-title': 'Planification intuitive',
+        'feature1-desc': 'Créez vos sprints en quelques clics avec une vue d\'ensemble claire.',
+        'feature2-title': 'Estimation visuelle',
+        'feature2-desc': 'Utilisez des tailles de t-shirts configurables pour estimer rapidement les user stories.',
+        'feature3-title': 'Suivi de capacité',
+        'feature3-desc': 'Analysez l\'utilisation de la capacité de votre équipe et anticipez les écarts.',
+        'feature4-title': 'Suivi en temps réel',
+        'feature4-desc': 'Gardez la trace de l\'avancement du backlog et des tâches assignées.',
+        'benefits-title': 'Pourquoi choisir Sprint Flow ?',
+        'benefit1': '✅ Gagnez du temps sur chaque sprint planning',
+        'benefit2': '✅ Évitez la surcharge de travail grâce à la capacité calculée automatiquement',
+        'benefit3': '✅ Interface épurée, prise en main immédiate',
+        'benefit4': '✅ Idéal pour les petites et moyennes équipes agiles',
+        'trial-title': 'Prêt à booster vos plannings ?',
+        'trial-desc': 'Essayez Sprint Flow gratuitement dès maintenant.',
+        'trial-button': 'Obtenir mon essai gratuit'
+      },
+      en: {
+        'nav-features': 'Features',
+        'nav-benefits': 'Benefits',
+        'nav-preview': 'Preview',
+        'nav-trial': 'Free Trial',
+        'main-title': 'Plan your Sprints with Ease',
+        'main-subtitle': 'Clear tracking, mastered capacity, smooth estimation. Save time, deliver better.',
+        'start-now': 'Get Started Now',
+        'features-title': 'Key Features',
+        'feature1-title': 'Intuitive Planning',
+        'feature1-desc': 'Create your sprints in just a few clicks with a clear overview.',
+        'feature2-title': 'Visual Estimation',
+        'feature2-desc': 'Use configurable t-shirt sizes to quickly estimate user stories.',
+        'feature3-title': 'Capacity Tracking',
+        'feature3-desc': 'Analyze your team\'s capacity utilization and anticipate gaps.',
+        'feature4-title': 'Real-time Tracking',
+        'feature4-desc': 'Keep track of backlog progress and assigned tasks.',
+        'benefits-title': 'Why Choose Sprint Flow?',
+        'benefit1': '✅ Save time on every sprint planning',
+        'benefit2': '✅ Avoid work overload with automatically calculated capacity',
+        'benefit3': '✅ Clean interface, immediate adoption',
+        'benefit4': '✅ Perfect for small and medium agile teams',
+        'trial-title': 'Ready to Boost Your Planning?',
+        'trial-desc': 'Try Sprint Flow for free right now.',
+        'trial-button': 'Get My Free Trial'
+      }
+    };
+
+    let currentLanguage = 'fr';
+
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(lang + '-btn').classList.add('active');
+      
+      // Update all elements with data-key attributes
+      document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+          element.textContent = translations[lang][key];
+        }
+      });
+      
+      // Update page language attribute
+      document.documentElement.lang = lang;
+      
+      // Store language preference
+      localStorage.setItem('preferred-language', lang);
+    }
+
+    // Load preferred language on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLang = localStorage.getItem('preferred-language');
+      if (savedLang && translations[savedLang]) {
+        changeLanguage(savedLang);
+      }
+    });
+  </script>
+</body>
+</html>
